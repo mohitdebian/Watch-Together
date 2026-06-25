@@ -10,24 +10,26 @@ export function ViewerPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   
-  const [isLive, setIsLive] = useState(false);
-  const [viewerCount, setViewerCount] = useState(0);
+  const [streamState, setStreamState] = useState<any>(null);
+  const isLive = streamState?.isLive || false;
 
-  // Audio controls state
+  const [viewerCount, setViewerCount] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    socket.on("stream:status", (state) => {
-      setIsLive(state.isLive);
-      
-      if (videoRef.current && state.isLive) {
-        if (state.isPaused) {
-          videoRef.current.pause();
-        } else {
-          videoRef.current.play().catch(e => console.error("Auto-play prevented", e));
-        }
+    if (videoRef.current && isLive) {
+      if (streamState?.isPaused) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch(e => console.error("Auto-play prevented", e));
       }
+    }
+  }, [isLive, streamState?.isPaused]);
+
+  useEffect(() => {
+    socket.on("stream:status", (state) => {
+      setStreamState(state);
     });
 
     socket.on("viewer:count", setViewerCount);
