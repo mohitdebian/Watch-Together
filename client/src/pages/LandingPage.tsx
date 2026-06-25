@@ -35,13 +35,13 @@ export function LandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-            <Link to="/broadcast">
+            <Link to={`/broadcast${window.location.search}`}>
               <Button size="lg" className="h-14 px-8 text-lg rounded-xl bg-white text-black hover:bg-white/90 shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all hover:scale-105">
                 <Video className="mr-2 h-5 w-5" />
                 Start Broadcasting
               </Button>
             </Link>
-            <Link to="/watch">
+            <Link to={`/watch${window.location.search}`}>
               <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-xl border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all hover:scale-105">
                 <Tv className="mr-2 h-5 w-5" />
                 Watch Stream
