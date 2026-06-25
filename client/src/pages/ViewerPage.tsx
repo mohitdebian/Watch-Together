@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSocket, SOCKET_URL } from "../lib/socket";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Users, Wifi, Loader2, Play, Volume2, VolumeX, Maximize } from "lucide-react";
+import { Users, Wifi, Play, Volume2, VolumeX, Maximize } from "lucide-react";
 import { ChatOverlay } from "../components/ChatOverlay";
 
 export function ViewerPage() {

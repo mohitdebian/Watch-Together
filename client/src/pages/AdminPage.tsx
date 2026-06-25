@@ -3,7 +3,6 @@ import { useSocket } from "../lib/socket";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Upload, Play, Pause, Square, Users, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 import { ChatOverlay } from "../components/ChatOverlay";
