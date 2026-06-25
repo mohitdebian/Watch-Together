@@ -10,6 +10,7 @@ import {
   SocketData,
   StreamState,
 } from "../../shared/types";
+import type { ChatMessage } from "../../shared/types";
 
 const app = express();
 app.use(cors());
