@@ -40,16 +40,16 @@ app.get('/api/stream', (req, res) => {
   }
 
   const range = req.headers.range;
-  if (!range) {
-    res.status(400).send("Requires Range header");
-    return;
-  }
-
   const size = streamState.meta.size;
-  const parts = range.replace(/bytes=/, "").split("-");
-  const start = parseInt(parts[0], 10);
-  // Default to 1MB chunks to ensure quick response and smooth relay
-  const end = parts[1] ? parseInt(parts[1], 10) : Math.min(start + 10 ** 6 - 1, size - 1); 
+  
+  let start = 0;
+  let end = Math.min(size - 1, start + 10 ** 6 - 1); // Default 1MB chunk
+
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-");
+    start = parseInt(parts[0], 10);
+    end = parts[1] ? parseInt(parts[1], 10) : Math.min(start + 10 ** 6 - 1, size - 1);
+  }
   
   if (start >= size || end >= size) {
     res.status(416).send("Requested range not satisfiable");

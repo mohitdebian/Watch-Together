@@ -111,6 +111,7 @@ export function ViewerPage() {
                   ref={videoRef} 
                   className="w-full h-full object-contain"
                   src={`${SOCKET_URL}/api/stream`}
+                  crossOrigin="anonymous"
                   autoPlay
                   playsInline
                   onClick={toggleFullscreen}
