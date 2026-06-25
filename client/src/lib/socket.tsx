@@ -3,7 +3,10 @@ import type { ClientToServerEvents, ServerToClientEvents } from "../../../shared
 import { createContext, useContext, useEffect, useState } from "react";
 import React from "react";
 
-export const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:3001";
+const params = new URLSearchParams(window.location.search);
+const customServer = params.get("server");
+
+export const SOCKET_URL = customServer || import.meta.env.VITE_SOCKET_URL || "http://localhost:3001";
 
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(SOCKET_URL, {
   autoConnect: true,
